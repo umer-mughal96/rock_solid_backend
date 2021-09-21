@@ -1,28 +1,28 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema(
+const WalletSchema = new Schema(
   {
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-    name: {
-      type: String,
-      unique: false,
-      required: true,
-    },
-   
-    password: {
+    
+    walletID: {
       type: String,
       required: true,
     },
-    verified : {
-      type : Boolean,
-      required : true
-    }
-   
+    userKeychain: {
+      type: String,
+      required: true,
+    },
+    backupKeychain: {
+      type: String,
+      required: true,
+    },
+    userID : {
+      type : Schema.Types.ObjectId,
+        ref : "User",
+        required : true,
+    },
+    
+
     
 
   },
@@ -31,4 +31,4 @@ const UserSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Wallet", WalletSchema);
