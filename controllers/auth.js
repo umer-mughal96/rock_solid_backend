@@ -19,6 +19,7 @@ const sendEmailToUser = require("../utils/email");
 //API         @  '/register '
 
 const registerUser = async (req, res, next) => {
+  res.sendStatus(200);
   let abc = '';
   let def= '';
   let userkey= '';
