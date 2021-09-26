@@ -89,21 +89,66 @@ const getBalance = async (req, res, next) => {
 //API         @  '/sendcoin'
 
 const sendCoin = async (req, res, next) => {
-  console.log("Send coin");
+  // try
+  // {
+    console.log("Send coin");
 
   const bitgo = new BitGoJS.BitGo({ env: 'test', accessToken: process.env.ACCESS_TOKEN });
   const useriD = req.user.id; // User ID from Cookies
 
-  getWalletID(useriD);
+  const wallet_id = await getWalletID(useriD);
 
-  const wallet = await bitgo.coin('tbtc').wallets().get({ id: walletData.walletID });
+  const walletPass = process.env.wallet_Pass;
+  /*  
+    let params = {
+  recipients: [
+    {
+      amount: 0.01 * 1e8,
+      address: '2NFfxvXpAWjKng7enFougtvtxxCJ2hQEMo4',
+    }
+  ]
+};
+wallet.prebuildTransaction(params)
+.then(function(transaction) {
+  // print transaction details
+  console.dir(transaction);
+});
+
+
+  */
+
+  await bitgo.coin('tbtc').wallets().get({ id: wallet_id })
+  .then(function(wallet) {
+  // print the wallet
+  // console.dir(wallet._wallet.balance);
+  // balance = wallet._wallet.balance;
+
+  let params = {
+    recipients: [
+      {
+        amount: 0.01 * 1e8,
+        address: '2NFfxvXpAWjKng7enFougtvtxxCJ2hQEMo4',
+      }
+    ]
+  };
+  wallet.prebuildTransaction(params)
+  .then(function(transaction) {
+    // print transaction details
+    console.dir(transaction);
+  });
+  
+  });
+  // console.log(wallet)
+  // const transaction = await wallet.wallet.sendCoins({address : '', amount : 1.99*1e8, walletPassphrase : walletPass});
+  // console.log(transaction);
     
-    // // print the wallet
-    // console.dir(wallet._wallet.balance);
-    // balance = wallet._wallet.balance;
-    // });
-
-//   res.sendStatus(200);
+  // }
+  // catch(error)
+  // {
+  //   console.log("This is error from catch:  "+error);
+  //   res.status(500).json({ success: false, error: error.message });
+  // }
+  
 
 
 

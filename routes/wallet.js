@@ -6,7 +6,7 @@ const {
 const { authenticated } = require("../middleware/auth");
 
 router.post("/getbalance",authenticated, getBalance);
-router.post("/sendcoin", sendCoin);
+router.post("/sendcoin", authenticated, sendCoin);
 
 
 

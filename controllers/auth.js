@@ -53,26 +53,27 @@ const registerUser = async (req, res, next) => {
 
     const walletPassword = process.env.wallet_Pass;
 
-    await bitgo.wallets().createWalletWithKeychains({"passphrase": walletPassword, "label": "Test wallet test 1"}, async function(err, result) {
-    if (err) { console.dir(err); throw new Error("Error creating wallet!"); }
-    // console.log("Wallet Created: " + result.wallet.id());
-    // console.log(result.wallet.wallet);
-    console.log("variables initialized etc")
-    wallet_id = await result.wallet.id() ;
-    abc = await result.userKeychain.encryptedXprv ; 
-    def = await result.userKeychain.encryptedXprv;
-    userkey = await bcrypt.hash(abc, salt); 
-    backupKey =  await bcrypt.hash(def, salt);
-  // console.log("BACK THIS UP: ");                                                                                                                                                  
-  // console.log("User keychain encrypted xPrv: " + result.userKeychain.encryptedXprv);                                                                                              
-  // console.log("Backup keychain encrypted xPrv: " + result.backupKeychain.encryptedXprv);                                                                                          
-  });
+  //   await bitgo.wallets().createWalletWithKeychains({"passphrase": walletPassword, "label": "Test wallet test 1"}, async function(err, result) {
+  //   if (err) { console.dir(err); throw new Error("Error creating wallet!"); }
+  //   // console.log("Wallet Created: " + result.wallet.id());
+  //   // console.log(result.wallet.wallet);
+  //   console.log("variables initialized etc")
+  //   wallet_id = await result.wallet.id() ;
+  //   abc = await result.userKeychain.encryptedXprv ; 
+  //   def = await result.userKeychain.encryptedXprv;
+  //   userkey = await bcrypt.hash(abc, salt); 
+  //   backupKey =  await bcrypt.hash(def, salt);
+  // // console.log("BACK THIS UP: ");                                                                                                                                                  
+  // // console.log("User keychain encrypted xPrv: " + result.userKeychain.encryptedXprv);                                                                                              
+  // // console.log("Backup keychain encrypted xPrv: " + result.backupKeychain.encryptedXprv);                                                                                          
+  // });
 
   await bitgo.coin('tbtc').wallets()
 .generateWallet({ label: 'My Test Wallet 123', passphrase: walletPassword })
 .then(async function(result) {
   // print the new wallet
-  // console.log(wallet.wallet);
+  const add = await result.wallet;
+  console.log(add);
   wallet_id = await result.wallet.id() ;
     abc = await result.userKeychain.prv ; 
     def = await result.backupKeychain.prv;
