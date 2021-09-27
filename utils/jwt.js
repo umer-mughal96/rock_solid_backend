@@ -5,6 +5,7 @@ const generateToken = async (payload, req, res) => {
     const token = await jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: 360000,
     });
+    
     return token;
   } catch (err) {
     console.log(err);

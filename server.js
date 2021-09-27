@@ -19,7 +19,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(cookie())
 app.use(cors({
-  origin: '*',
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 app.use(express.json({ extended: false }));
