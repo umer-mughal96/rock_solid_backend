@@ -158,7 +158,7 @@ const userLogin = async (req, res, next) => {
     const token = await generateToken(payload);
     const loginUser = await User.findOne({ email }).select("-password");
 
-    res.cookie('token', token, { expires: dayjs().add(1, "days").toDate(), httpOnly: true }).status(200).json({ success: true, loginUser });
+    res.cookie('token', token, { expires: dayjs().add(1, "days").toDate(), httpOnly: false }).status(200).json({ success: true, loginUser });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
