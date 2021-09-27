@@ -19,7 +19,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(cookie())
 app.use(cors({
-  origin: ['http://localhost:3001','https://www.rock-solid.exchange'],
+  origin: 'https://www.rock-solid.exchange',
   credentials: true
 }));
 app.use(express.json({ extended: false }));
