@@ -38,8 +38,8 @@ connectDB();
 
 app.use('/rocksolid/api/v1/auth', authRoute)
 app.use('/rocksolid/api/v1/wallet', walletRoute);
-app.get('/', (req, res)=>{
-  res.status(200);
+app.get('/test', (req, res)=>{
+  res.sendStatus(200);
 })
 
 
